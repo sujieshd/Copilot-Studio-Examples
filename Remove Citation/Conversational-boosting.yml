@@ -1,0 +1,30 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnUnknownIntent
+  id: main
+  priority: -1
+  actions:
+    - kind: SearchAndSummarizeContent
+      id: search-content
+      autoSend: false
+      variable: Topic.Answer
+      userInput: =System.Activity.Text
+
+    - kind: ConditionGroup
+      id: has-answer-conditions
+      conditions:
+        - id: has-answer
+          condition: =!IsBlank(Topic.Answer)
+          actions:
+            - kind: SetVariable
+              id: setVariable_h7bOJg
+              variable: Topic.AnswerBody
+              value: =	Substitute(	    Substitute(	        Substitute(	            Substitute(	                Substitute(	                    Substitute(	                        Substitute(	                            Substitute(	                                Substitute(Left(Topic.Answer, Find("[1]:", Topic.Answer) + -1) , "[1]", ""),	                                "[2]", ""),	                            "[3]", ""),	                        "[4]", ""),	                    "[5]", ""),	                "[6]", ""),	            "[7]", ""),	        "[8]", ""),  "[9]", "")
+
+            - kind: SendActivity
+              id: sendActivity_NOQNTG
+              activity: "{Topic.AnswerBody}"
+
+            - kind: EndDialog
+              id: end-topic
+              clearTopicQueue: true
