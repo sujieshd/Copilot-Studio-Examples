@@ -1,0 +1,19 @@
+	kind: AdaptiveDialog
+	beginDialog:
+	  kind: OnGeneratedResponse
+	  id: main
+	  condition: =CountRows(System.Response.Citations)>0
+	  actions:
+	    - kind: SetVariable
+	      id: setVariable_3HOZUA
+	      variable: Topic.AnswerBody
+	      value: =  Substitute(     Substitute(         Substitute(             Substitute(                 Substitute(                     Substitute(                         Substitute(                             Substitute(                                 Substitute(Left(System.Response.FormattedText, Find("[1]:", System.Response.FormattedText) + -1) , "[1]", ""),                                  "[2]", ""),                             "[3]", ""),                         "[4]", ""),                     "[5]", ""),                 "[6]", ""),             "[7]", ""),         "[8]", ""),  "[9]", "")
+	    - kind: SendActivity
+	      id: sendActivity_bsuUEG
+	      activity: "{Topic.AnswerBody}"
+	    - kind: SetVariable
+	      id: setVariable_vLhn52
+	      variable: System.ContinueResponse
+	      value: false
+	inputType: {}
+outputType: {}
